@@ -168,6 +168,10 @@ static CGFloat const kAKButtonSeparatorWidth = 1.0;
 
 - (void)setButtonsArray:(NSArray *)buttonsArray {
     [_buttonsArray makeObjectsPerformSelector:@selector(removeFromSuperview)];
+
+    for (UIView *view in _separatorsArray) {
+        [view removeFromSuperview];
+    }
     [_separatorsArray removeAllObjects];
     
     _buttonsArray = buttonsArray;
@@ -223,8 +227,12 @@ static CGFloat const kAKButtonSeparatorWidth = 1.0;
     [_separatorsArray makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     NSUInteger separatorsNumber = [_buttonsArray count] - 1;
-    
+
+    for (UIView *view in _separatorsArray) {
+        [view removeFromSuperview];
+    }
     [_separatorsArray removeAllObjects];
+
     [_buttonsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (idx < separatorsNumber) {
             UIImageView *separatorImageView = [[UIImageView alloc] initWithImage:_separatorImage];
